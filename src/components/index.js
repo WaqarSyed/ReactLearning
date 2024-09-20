@@ -9,8 +9,9 @@ import Login from "./Login";
 import PostForm from "./post-form/PostForm";
 import PostCard from "./PostCard";
 import AuthLayout from "./AuthLayout";
-import Buttton from "./Buttton";
-
+import Button from "./Buttton";
+import Input from "./Input";
+import Select from "./Select";
 export {
   Header,
   Footer,
@@ -23,5 +24,7 @@ export {
   PostForm,
   PostCard,
   AuthLayout,
-  Buttton,
+  Button,
+  Input,
+  Select,
 };
