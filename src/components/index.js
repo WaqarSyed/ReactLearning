@@ -8,6 +8,8 @@ import Signup from "./Signup";
 import Login from "./Login";
 import PostForm from "./post-form/PostForm";
 import PostCard from "./PostCard";
+import AuthLayout from "./AuthLayout";
+import Buttton from "./Buttton";
 
 export {
   Header,
@@ -20,4 +22,6 @@ export {
   Login,
   PostForm,
   PostCard,
+  AuthLayout,
+  Buttton,
 };
