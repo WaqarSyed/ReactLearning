@@ -1,19 +1,20 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import React from "react";
+import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import { AuthLayout, Login } from "./components/index.js";
-import Post from "./pages/Post.jsx";
 
-import AllPosts from "./pages/AllPosts.jsx";
-import AddPost from "./pages/AddPost.jsx";
-import EditPost from "./pages/EditPost.jsx";
+import AddPost from "./pages/AddPost";
+import Signup from "./pages/Signup";
+import EditPost from "./pages/EditPost";
 
-import Signup from "./pages/Signup.jsx";
+import Post from "./pages/Post";
+
+import AllPosts from "./pages/AllPosts";
 
 const router = createBrowserRouter([
   {
@@ -43,7 +44,8 @@ const router = createBrowserRouter([
       {
         path: "/all-posts",
         element: (
-          <AuthLayout authentication={true}>
+          <AuthLayout authentication>
+            {" "}
             <AllPosts />
           </AuthLayout>
         ),
@@ -51,7 +53,8 @@ const router = createBrowserRouter([
       {
         path: "/add-post",
         element: (
-          <AuthLayout authentication={true}>
+          <AuthLayout authentication>
+            {" "}
             <AddPost />
           </AuthLayout>
         ),
@@ -59,7 +62,8 @@ const router = createBrowserRouter([
       {
         path: "/edit-post/:slug",
         element: (
-          <AuthLayout authentication={true}>
+          <AuthLayout authentication>
+            {" "}
             <EditPost />
           </AuthLayout>
         ),
@@ -72,10 +76,10 @@ const router = createBrowserRouter([
   },
 ]);
 
-createRoot(document.getElementById("root")).render(
-  <StrictMode>
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
-  </StrictMode>
+  </React.StrictMode>
 );
