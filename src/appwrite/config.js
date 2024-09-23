@@ -22,7 +22,7 @@ export class Service {
         { title, content, featuredImage, status, userId }
       );
     } catch (error) {
-      console.log("Appwrtie service :: createPost :: error ", error);
+      console.log("Appwrite service :: createPost :: error ", error);
     }
   }
 
