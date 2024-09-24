@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
-import { Button, Input, Select, RTE } from "../index";
+import { Button, Input, Select, RTE } from "..";
 import appwriteService from "../../appwrite/config";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -35,7 +35,7 @@ export default function PostForm({ post }) {
         },
       });
     } else {
-      const file = appwriteService.uploadFile(data.image[0]);
+      const file = await appwriteService.uploadFile(data.image[0]);
       if (file) {
         const fileId = file.$id;
         data.featuredImage = fileId;
@@ -67,9 +67,7 @@ export default function PostForm({ post }) {
       }
     });
 
-    return () => {
-      subscription.unsubscribe();
-    };
+    return () => subscription.unsubscribe();
   }, [watch, slugTransform, setValue]);
   return (
     <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
@@ -117,7 +115,7 @@ export default function PostForm({ post }) {
         )}
         <Select
           options={["active", "inactive"]}
-          label="Status "
+          label="Status : "
           className="mb-4"
           {...register("status", { required: true })}
         />
