@@ -10,8 +10,9 @@ export default function PostForm({ post }) {
     useForm({
       defaultValues: {
         title: post?.title || "",
-        content: post?.content || "",
         slug: post?.$id || "",
+        content: post?.content || "",
+
         status: post?.status || "active",
       },
     });

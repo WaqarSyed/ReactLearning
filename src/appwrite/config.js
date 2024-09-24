@@ -13,8 +13,10 @@ export class Service {
     this.storage = new Storage(this.client);
   }
 
-  async createPost({ title, slug, content, featuredImage, status, userId }) {
+  async createPost({ slug, title, content, featuredImage, status, userId }) {
     try {
+      if (!featuredImage) console.log("No featured image provided");
+
       return await this.databases.createDocument(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
