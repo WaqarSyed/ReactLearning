@@ -15,16 +15,20 @@ export class Service {
 
   async createPost({ slug, title, content, featuredImage, status, userId }) {
     try {
-      if (!featuredImage) console.log("No featured image provided");
-
       return await this.databases.createDocument(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
         slug,
-        { title, content, featuredImage, status, userId }
+        {
+          title,
+          content,
+          featuredImage,
+          status,
+          userId,
+        }
       );
     } catch (error) {
-      console.log("Appwrite service :: createPost :: error ", error);
+      console.log("Appwrite Service Error :: createPost :: error ", error);
     }
   }
 
@@ -42,7 +46,7 @@ export class Service {
         }
       );
     } catch (error) {
-      console.log("Appwrtie service :: updatePost :: error ", error);
+      console.log("Appwrite Service Error :: updatePost :: error ", error);
     }
   }
 
@@ -55,7 +59,7 @@ export class Service {
       );
       return true;
     } catch (error) {
-      console.log("Appwrtie service :: deletePost :: error ", error);
+      console.log("Appwrite Service Error :: deletePost :: error ", error);
       return false;
     }
   }
@@ -67,10 +71,11 @@ export class Service {
         slug
       );
     } catch (error) {
-      console.log("Appwrtie service :: getPost :: error ", error);
+      console.log("Appwrite Service Error :: getPost :: error ", error);
       return false;
     }
   }
+
   async getPosts(queries = [Query.equal("status", "active")]) {
     try {
       return await this.databases.listDocuments(
@@ -79,12 +84,12 @@ export class Service {
         queries
       );
     } catch (error) {
-      console.log("Appwrtie service :: getPosts :: error ", error);
+      console.log("Appwrite Service Error :: getPosts :: error ", error);
       return false;
     }
   }
+  //file services
 
-  // file upload service
   async uploadFile(file) {
     try {
       return await this.storage.createFile(
@@ -93,7 +98,7 @@ export class Service {
         file
       );
     } catch (error) {
-      console.log("Appwrtie service :: uploadFile :: error ", error);
+      console.log("Appwrite Service Error :: uploadFile :: error ", error);
       return false;
     }
   }
@@ -102,16 +107,18 @@ export class Service {
       await this.storage.deleteFile(conf.appwriteBucketId, fileId);
       return true;
     } catch (error) {
-      console.log("Appwrtie service :: deleteFile :: error ", error);
+      console.log("Appwrite Service Error :: deleteFile :: error ", error);
       return false;
     }
   }
-
   getFilePreview(fileId) {
-    return this.storage.getFilePreview(conf.appwriteBucketId, fileId);
+    try {
+      return this.storage.getFilePreview(conf.appwriteBucketId, fileId);
+    } catch (error) {
+      console.log("Appwrite Service Error :: getFilePreview :: error ", error);
+    }
   }
 }
 
 const service = new Service();
-
 export default service;
