@@ -33,7 +33,9 @@ function App() {
         <Footer />
       </div>
     </div>
-  ) : null;
+  ) : (
+    <h2>Loading...</h2>
+  );
 }
 
 export default App;
