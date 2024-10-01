@@ -17,7 +17,7 @@ function Signup() {
     try {
       const userData = await authService.createAccount(data);
       if (userData) {
-        const userData = await authService.getCurrentUser();
+        const userData = await authService.getCurrentUser(userData);
         if (userData) dispatch(login(userData));
         navigate("/");
       }
@@ -25,6 +25,7 @@ function Signup() {
       setError(error.message);
     }
   };
+
   return (
     <div className="flex items-center justify-center">
       <div
