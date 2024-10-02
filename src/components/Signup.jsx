@@ -17,12 +17,13 @@ function Signup() {
     try {
       const userData = await authService.createAccount(data);
       if (userData) {
-        const userData = await authService.getCurrentUser(userData);
-        if (userData) dispatch(login(userData));
+        const currentData = await authService.getCurrentUser(userData);
+        if (currentData) dispatch(login(userData));
         navigate("/");
       }
     } catch (error) {
       setError(error.message);
+      console.warn(error);
     }
   };
 
