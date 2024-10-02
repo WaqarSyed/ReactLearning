@@ -37,6 +37,7 @@ export default function PostForm({ post }) {
         navigate(`/post/${dbPost.$id}/`);
       }
     } else {
+      //TODO: Improve that functionality by checking : is there any post or not
       const file = await appwriteService.uploadFile(data.image[0]);
       if (file) {
         const fileId = file.$id;
