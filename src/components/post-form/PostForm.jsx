@@ -18,6 +18,8 @@ export default function PostForm({ post }) {
     });
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
+  // console.log(userData);
+
   const submit = async (data) => {
     if (post) {
       const file = data.image[0]
@@ -30,10 +32,10 @@ export default function PostForm({ post }) {
       const dbPost = await appwriteService.updatePost(post.$id, {
         ...data,
         featuredImage: file ? file.$id : undefined,
-        if(dbPost) {
-          navigate(`/post/${dbPost.$id}`);
-        },
       });
+      if (dbPost) {
+        navigate(`/post/${dbPost.$id}/`);
+      }
     } else {
       const file = await appwriteService.uploadFile(data.image[0]);
       if (file) {
@@ -66,6 +68,7 @@ export default function PostForm({ post }) {
         setValue("slug", slugTransform(value.title, { shouldValidate: true }));
       }
     });
+    console.log(post);
 
     return () => subscription.unsubscribe();
   }, [watch, slugTransform, setValue]);
@@ -94,6 +97,7 @@ export default function PostForm({ post }) {
           name="content"
           control={control}
           defaultValue={getValues("content")}
+          {...register("content", { required: true })}
         />
       </div>
       <div className="w-1/3 px-2">
