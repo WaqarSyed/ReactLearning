@@ -71,7 +71,7 @@ export default function PostForm({ post }) {
     <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
       <div className="w-2/3 px-2">
         <Input
-          lable="Title : "
+          label="Title : "
           placeholder="Title"
           className="mb-4"
           {...register("title", { required: true })}
