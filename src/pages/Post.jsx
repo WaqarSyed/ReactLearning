@@ -33,7 +33,7 @@ export default function Post() {
   };
 
   return post ? (
-    <div className="py-8">
+    <div className="py-8 bg-sky-400 ">
       <Container>
         <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
           <img
@@ -45,20 +45,20 @@ export default function Post() {
           {isAuthor && (
             <div className="absolute right-6 top-6">
               <Link to={`/edit-post/${post.$id}`}>
-                <Button bgColor="bg-green-500" className="mr-3">
+                <Button bgColor="bg-green-700" className="mr-3">
                   Edit
                 </Button>
               </Link>
-              <Button bgColor="bg-red-500" onClick={deletePost}>
+              <Button bgColor="bg-red-700" onClick={deletePost}>
                 Delete
               </Button>
             </div>
           )}
         </div>
         <div className="w-full mb-6">
-          <h1 className="text-xl font-bold">{post.title}</h1>
+          <h1 className="text-xl font-bold text-gray-700">{post.title}</h1>
         </div>
-        <div className="browser-css">{parse(post.content)}</div>
+        <div className="browser-css text-gray-700">{parse(post.content)}</div>
       </Container>
     </div>
   ) : null;

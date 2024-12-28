@@ -30,6 +30,9 @@ export default function PostForm({ post }) {
         ...data,
         featuredImage: file ? file.$id : undefined,
       });
+      if (dbPost) {
+        navigate(`/post/${dbPost.$id}`);
+      }
     } else {
       //TODO: Improve that functionality by checking : is there any post or not
       const file = await appwriteService.uploadFile(data.image[0]);
@@ -61,14 +64,14 @@ export default function PostForm({ post }) {
         setValue("slug", slugTransform(value.title, { shouldValidate: true }));
       }
     });
-
+    console.log(post);
     return () => subscription.unsubscribe();
   }, [watch, slugTransform, setValue]);
   return (
     <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
       <div className="w-2/3 px-2">
         <Input
-          lable="Title : "
+          label="Title : "
           placeholder="Title"
           className="mb-4"
           {...register("title", { required: true })}
